@@ -39,6 +39,9 @@
 **
 ****************************************************************************/
 
+// TODO - Using Mobility Sensors API rotate webBrowser so that it will stay
+// horizontal like water in a glass
+
 import Qt 4.7
 import QtWebKit 1.0
 
@@ -46,11 +49,30 @@ import "content"
 
 Rectangle {
     id: webBrowser
-
     property string urlString : "http://www.google.com/"
-
     width: 800; height: 480
     color: "#343434"
+
+    state: "orientation " + runtime.orientation
+
+    states: [
+        State {
+            name: "orientation " + Orientation.Landscape
+            PropertyChanges { target: webBrowser; width: 800; height: 480; rotation: 0 }
+        },
+        State {
+            name: "orientation " + Orientation.Portrait
+            PropertyChanges { target:  webBrowser; width: 480; height: 800; rotation: -90 }
+        }
+    ]
+
+    // for debugging
+    Timer {
+        interval: 1000; running: true; repeat: true
+        onTriggered: console.log("webBrowser: " + webBrowser.width + "x" + webBrowser.height +
+                                 " headerSpace: " + headerSpace.width + "x" + headerSpace.height +
+                                 " webView: " + webView.width + "x" + webView.height)
+    }
 
     FlickableWebView {
         id: webView
