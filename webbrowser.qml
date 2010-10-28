@@ -39,7 +39,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 1.0
+import Qt 4.7
 import QtWebKit 1.0
 
 import "content"
@@ -47,9 +47,9 @@ import "content"
 Rectangle {
     id: webBrowser
 
-    property string urlString : "http://www.nokia.com/"
+    property string urlString : "http://www.google.com/"
 
-    width: 800; height: 600
+    width: 800; height: 480
     color: "#343434"
 
     FlickableWebView {
