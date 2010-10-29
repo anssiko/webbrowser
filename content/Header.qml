@@ -65,7 +65,7 @@ Image {
             width: parent.width; height: 20
             Text {
                 anchors.centerIn: parent
-                text: webView.title; font.pixelSize: 14; font.bold: true
+                text: webView.title; font.pixelSize: 18; font.bold: true
                 color: "white"; styleColor: "black"; style: Text.Sunken
             }
         }

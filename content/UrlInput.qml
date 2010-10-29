@@ -47,6 +47,9 @@ Item {
     property alias image: bg.source
     property alias url: urlText.text
 
+    property color urlTextColor: "gray"
+    property color urlTextColorActive: "black"
+
     signal urlEntered(string url)
     signal urlChanged
 
@@ -69,22 +72,26 @@ Item {
     TextInput {
         id: urlText
         horizontalAlignment: TextEdit.AlignLeft
-        font.pixelSize: 14;
+        font.pixelSize: 18;
+        color: urlTextColor
 
         onTextChanged: container.urlChanged()
 
         Keys.onEscapePressed: {
             urlText.text = webView.url
+            urlText.color = urlTextColor
             webView.focus = true
         }
 
         Keys.onEnterPressed: {
             container.urlEntered(urlText.text)
+            urlText.color = urlTextColor
             webView.focus = true
         }
 
         Keys.onReturnPressed: {
             container.urlEntered(urlText.text)
+            urlText.color = urlTextColor
             webView.focus = true
         }
 
@@ -92,5 +99,12 @@ Item {
             left: parent.left; right: parent.right; leftMargin: 18; rightMargin: 18
             verticalCenter: parent.verticalCenter
         }
+
+        MouseArea {
+            anchors.fill: parent
+            onPressed: { parent.focus = true; urlText.color = urlTextColorActive; }
+        }
+
     }
+
 }
