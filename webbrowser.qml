@@ -39,9 +39,6 @@
 **
 ****************************************************************************/
 
-// TODO - Using Mobility Sensors API to rotate webBrowser so that it will stay
-// horizontal like water in a glass
-
 import Qt 4.7
 import QtWebKit 1.0
 
