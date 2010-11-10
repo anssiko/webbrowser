@@ -53,6 +53,9 @@ Rectangle {
     state: "orientation " + runtime.orientation
 
     states: [
+
+        // TODO - Qt Mobility Systeminfo orientation
+
         State {
             name: "orientation " + Orientation.Landscape
             PropertyChanges { target: webBrowser; width: 800; height: 480; rotation: 0 }

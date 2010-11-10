@@ -110,6 +110,10 @@ Flickable {
 
         Keys.onLeftPressed: webView.contentsScale -= 0.1
         Keys.onRightPressed: webView.contentsScale += 0.1
+        // TODO - can not rely on webBrowser.height if orientation changes
+        Keys.onUpPressed: { if (flickable.contentY > 0) flickable.contentY -= 30; }
+        Keys.onDownPressed: { if (flickable.contentY < flickable.contentHeight - webBrowser.height) flickable.contentY += 30; }
+        Keys.onPressed: { if (event.key === 16777219) webView.back(); }
 
         preferredWidth: flickable.width
         preferredHeight: flickable.height

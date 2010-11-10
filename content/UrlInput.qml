@@ -72,7 +72,7 @@ Item {
     TextInput {
         id: urlText
         horizontalAlignment: TextEdit.AlignLeft
-        font.pixelSize: 18;
+        font.pixelSize: 18
         color: urlTextColor
 
         onTextChanged: container.urlChanged()
