@@ -108,10 +108,11 @@ Flickable {
             }
         }
 
-        Keys.onLeftPressed: { if (webView.contentsScale > 0.5) zoomOut.start(); }
-        Keys.onRightPressed: { if (webView.contentsScale < 2) zoomIn.start(); }
-        Keys.onUpPressed: { if (flickable.contentY > 0) scrollUp.start(); }
-        Keys.onDownPressed: { if (flickable.contentY < flickable.contentHeight - webBrowser.height) scrollDown.start(); }
+        Keys.onLeftPressed: zoomOut.start()
+        Keys.onRightPressed: zoomIn.start()
+        Keys.onUpPressed: scrollUp.start()
+        Keys.onDownPressed: scrollDown.start()
+        Keys.onSpacePressed: scrollPageDown.start()
         Keys.onPressed: { if (event.key === 16777219) webView.back(); }
 
         preferredWidth: flickable.width
@@ -198,32 +199,60 @@ Flickable {
         SequentialAnimation {
             id: scrollDown; running: false
             PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY";
-                              from: flickable.contentY; to: flickable.contentY + 200 }
+            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY"; from: flickable.contentY;
+                to: {
+                    if (flickable.contentY < flickable.contentHeight - webBrowser.height) return flickable.contentY + 200
+                    else return flickable.contentHeight - webBrowser.height
+                }
+            }
             PropertyAction { target: webView; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: scrollUp; running: false
             PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY";
-                              from: flickable.contentY; to: flickable.contentY - 200 }
+            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY"; from: flickable.contentY;
+                to: {
+                    if (flickable.contentY > 0) return flickable.contentY - 200
+                    else return 0
+                }
+            }
+            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+        }
+
+        SequentialAnimation {
+            id: scrollPageDown; running: false
+            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY"; from: flickable.contentY;
+                to: {
+                    if (flickable.contentY < flickable.contentHeight - webBrowser.height) return flickable.contentY + webBrowser.height
+                    else return flickable.contentHeight - webBrowser.height
+                }
+            }
             PropertyAction { target: webView; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: zoomOut; running: false
             PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale";
-                              from: webView.contentsScale; to: webView.contentsScale - 0.25 }
+            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale"; from: webView.contentsScale;
+                to: {
+                    if (webView.contentsScale > 0.5) return webView.contentsScale - 0.25
+                    else return 0.5
+                }
+            }
             PropertyAction { target: webView; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: zoomIn; running: false
             PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale";
-                              from: webView.contentsScale; to: webView.contentsScale + 0.25 }
+            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale"; from: webView.contentsScale;
+                to: {
+                    if (webView.contentsScale < 1.5) return webView.contentsScale + 0.25
+                    else return 1.5
+                }
+            }
             PropertyAction { target: webView; property: "renderingEnabled"; value: true }
         }
 
