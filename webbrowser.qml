@@ -50,32 +50,22 @@ Rectangle {
     width: 800; height: 480
     color: "#343434"
 
-    state: "orientation " + runtime.orientation
+//    state: "orientation " + runtime.orientation
 
-    states: [
+//    states: [
 
-        // TODO - Qt Mobility Systeminfo orientation
+//        // in N900 QML Viewer ctrl+shift+r will force autorotation
+//        // http://developer.qt.nokia.com/forums/viewthread/1937
 
-        State {
-            name: "orientation " + Orientation.Landscape
-            PropertyChanges { target: webBrowser; width: 800; height: 480; rotation: 0 }
-        },
-        State {
-            name: "orientation " + Orientation.Portrait
-            // disabled portrait mode
-            //PropertyChanges { target:  webBrowser; width: 480; height: 800; rotation: -90 }
-        }
-    ]
-
-    // for debugging
-    /*
-    Timer {
-        interval: 1000; running: true; repeat: true
-        onTriggered: console.log("webBrowser: " + webBrowser.width + "x" + webBrowser.height +
-                                 " headerSpace: " + headerSpace.width + "x" + headerSpace.height +
-                                 " webView: " + webView.width + "x" + webView.height)
-    }
-    */
+//        State {
+//            name: "orientation " + Orientation.Landscape
+//            PropertyChanges { target: webBrowser; width: 800; height: 480; rotation: 0 }
+//        },
+//        State {
+//            name: "orientation " + Orientation.Portrait
+//            PropertyChanges { target:  webBrowser; width: 480; height: 800; rotation: -90 }
+//        }
+//    ]
 
     FlickableWebView {
         id: webView
@@ -101,4 +91,20 @@ Rectangle {
         scrollArea: webView; height: 8; orientation: Qt.Horizontal
         anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
     }
+
+// http://doc.qt.nokia.com/4.7-snapshot/qml-intro.html
+// experimental rotation effect for e.g. settings
+
+//    transform: Rotation {
+//        id: rotate
+//        // axis {x: 0; y: 1; z: 1}
+//        origin.x: webBrowser.width/2; origin.y: webBrowser.height/2; axis {x: 0; y: 1; z: 0} angle: 0
+//        NumberAnimation on angle {
+//            running: false // true to enable, slowish
+//            from: 0; to: 360;
+//            duration: 10000;
+//            //loops: Animation.Infinite
+//        }
+//    }
+
 }

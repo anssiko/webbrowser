@@ -1,5 +1,5 @@
 #include <QApplication>
- #include <QDeclarativeView>
+#include <QDeclarativeView>
 
  int main(int argc, char *argv[])
  {

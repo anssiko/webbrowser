@@ -108,11 +108,10 @@ Flickable {
             }
         }
 
-        Keys.onLeftPressed: webView.contentsScale -= 0.1
-        Keys.onRightPressed: webView.contentsScale += 0.1
-        // TODO - can not rely on webBrowser.height if orientation changes
-        Keys.onUpPressed: { if (flickable.contentY > 0) flickable.contentY -= 30; }
-        Keys.onDownPressed: { if (flickable.contentY < flickable.contentHeight - webBrowser.height) flickable.contentY += 30; }
+        Keys.onLeftPressed: { if (webView.contentsScale > 0.5) zoomOut.start(); }
+        Keys.onRightPressed: { if (webView.contentsScale < 2) zoomIn.start(); }
+        Keys.onUpPressed: { if (flickable.contentY > 0) scrollUp.start(); }
+        Keys.onDownPressed: { if (flickable.contentY < flickable.contentHeight - webBrowser.height) scrollDown.start(); }
         Keys.onPressed: { if (event.key === 16777219) webView.back(); }
 
         preferredWidth: flickable.width
@@ -195,5 +194,81 @@ Flickable {
             }
         }
         onZoomTo: doZoom(zoom,centerX,centerY)
+
+        SequentialAnimation {
+            id: scrollDown; running: false
+            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY";
+                              from: flickable.contentY; to: flickable.contentY + 200 }
+            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+        }
+
+        SequentialAnimation {
+            id: scrollUp; running: false
+            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY";
+                              from: flickable.contentY; to: flickable.contentY - 200 }
+            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+        }
+
+        SequentialAnimation {
+            id: zoomOut; running: false
+            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale";
+                              from: webView.contentsScale; to: webView.contentsScale - 0.25 }
+            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+        }
+
+        SequentialAnimation {
+            id: zoomIn; running: false
+            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale";
+                              from: webView.contentsScale; to: webView.contentsScale + 0.25 }
+            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+        }
+
+//    SequentialAnimation on x {
+//        id: nextAnimation; running: false
+//        PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+//        NumberAnimation { from: 0; to: -webBrowser.width; duration: 300; easing.type: Easing.InQuad }
+//        NumberAnimation { from: webBrowser.width; to: 0; duration: 300; easing.type: Easing.OutQuad }
+//        PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+//    }
+
+//    SequentialAnimation on x {
+//        id: backAnimation; running: false
+//        PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+//        NumberAnimation { from: 0; to: webBrowser.width*2; duration: 300; easing.type: Easing.InQuad }
+//        NumberAnimation { from: -webBrowser.width; to: 0; duration: 300; easing.type: Easing.OutQuad }
+//        PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+//    }
+
+// Alternative approach using states and transitions
+
+//    states: [
+//        State {
+//            name: "left"
+//            PropertyChanges { target: webView; x: -webBrowser.width }
+//        },
+//        State {
+//            name: "center"
+//            PropertyChanges { target: webView; x: 0 }
+//        },
+//        State {
+//            name: "right"
+//            PropertyChanges { target: webView; x: webBrowser.width }
+//        }
+//    ]
+
+//    transitions: [
+//        Transition {
+//            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+//            NumberAnimation { properties: "x"; duration: 500; easing.type: Easing.InOutQuad }
+//            NumberAnimation { properties: "y"; duration: 100 }
+//            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+//        }
+//    ]
+
     }
+
 }
