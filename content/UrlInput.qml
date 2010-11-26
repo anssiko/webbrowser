@@ -46,7 +46,6 @@ Item {
 
     property alias image: bg.source
     property alias url: urlText.text
-
     property color urlTextColor: "gray"
     property color urlTextColorActive: "black"
 
