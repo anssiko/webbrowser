@@ -42,30 +42,17 @@
 import Qt 4.7
 import QtWebKit 1.0
 
-import "content"
+import "qml"
 
 Rectangle {
     id: webBrowser
+    property variant theme: chromiumTheme
     property string urlString : "http://www.w3.org/"
     width: 800; height: 480
-    color: "#343434"
+    color: webBrowser.theme.backgroundColor
 
-//    state: "orientation " + runtime.orientation
-
-//    states: [
-
-//        // in N900 QML Viewer ctrl+shift+r will force autorotation
-//        // http://developer.qt.nokia.com/forums/viewthread/1937
-
-//        State {
-//            name: "orientation " + Orientation.Landscape
-//            PropertyChanges { target: webBrowser; width: 800; height: 480; rotation: 0 }
-//        },
-//        State {
-//            name: "orientation " + Orientation.Portrait
-//            PropertyChanges { target:  webBrowser; width: 480; height: 800; rotation: -90 }
-//        }
-//    ]
+    Theme { id: defaultTheme }
+    ChromiumTheme { id: chromiumTheme }
 
     FlickableWebView {
         id: webView
@@ -74,7 +61,7 @@ Rectangle {
         anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
     }
 
-    Item { id: headerSpace; width: parent.width; height: 62 }
+    Item { id: headerSpace; width: parent.width; height: 67; }
 
     Header {
         id: header
@@ -91,20 +78,5 @@ Rectangle {
         scrollArea: webView; height: 8; orientation: Qt.Horizontal
         anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
     }
-
-// http://doc.qt.nokia.com/4.7-snapshot/qml-intro.html
-// experimental rotation effect for e.g. settings
-
-//    transform: Rotation {
-//        id: rotate
-//        // axis {x: 0; y: 1; z: 1}
-//        origin.x: webBrowser.width/2; origin.y: webBrowser.height/2; axis {x: 0; y: 1; z: 0} angle: 0
-//        NumberAnimation on angle {
-//            running: false // true to enable, slowish
-//            from: 0; to: 360;
-//            duration: 10000;
-//            //loops: Animation.Infinite
-//        }
-//    }
 
 }

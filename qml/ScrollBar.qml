@@ -49,8 +49,7 @@ Item {
 
     opacity: 0
 
-    function position()
-    {
+    function position() {
         var ny = 0;
         if (container.orientation == Qt.Vertical)
             ny = scrollArea.visibleArea.yPosition * container.height;
@@ -59,8 +58,7 @@ Item {
         if (ny > 2) return ny; else return 2;
     }
 
-    function size()
-    {
+    function size() {
         var nh, ny;
 
         if (container.orientation == Qt.Vertical)
@@ -86,7 +84,7 @@ Item {
     Rectangle { anchors.fill: parent; color: "Black"; opacity: 0.5 }
 
     BorderImage {
-        source: "pics/scrollbar.png"
+        source: webBrowser.theme.scrollBar
         border { left: 1; right: 1; top: 1; bottom: 1 }
         x: container.orientation == Qt.Vertical ? 2 : position()
         width: container.orientation == Qt.Vertical ? container.width - 4 : size()

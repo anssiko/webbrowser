@@ -46,8 +46,6 @@ Item {
 
     property alias image: bg.source
     property alias url: urlText.text
-    property color urlTextColor: "gray"
-    property color urlTextColorActive: "black"
 
     signal urlEntered(string url)
     signal urlChanged
@@ -62,8 +60,8 @@ Item {
     }
 
     Rectangle {
-        anchors.bottom: bg.bottom
-        x: 18; height: 4; color: "#63b1ed"
+        anchors.bottom: urlText.bottom
+        x: 12; height: 22; color: "#b5d5ff"
         width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 1.0
     }
@@ -72,25 +70,28 @@ Item {
         id: urlText
         horizontalAlignment: TextEdit.AlignLeft
         font.pixelSize: 18
-        color: urlTextColor
+        color: webBrowser.theme.urlTextColor
+        selectByMouse: true
+
+        onFocusChanged: {
+            urlText.cursorVisible = (focus == true) ? true : false
+            header.urlChanged = true /* to show go button */
+        }
 
         onTextChanged: container.urlChanged()
 
         Keys.onEscapePressed: {
             urlText.text = webView.url
-            urlText.color = urlTextColor
             webView.focus = true
         }
 
         Keys.onEnterPressed: {
             container.urlEntered(urlText.text)
-            urlText.color = urlTextColor
             webView.focus = true
         }
 
         Keys.onReturnPressed: {
             container.urlEntered(urlText.text)
-            urlText.color = urlTextColor
             webView.focus = true
         }
 
@@ -98,12 +99,6 @@ Item {
             left: parent.left; right: parent.right; leftMargin: 18; rightMargin: 18
             verticalCenter: parent.verticalCenter
         }
-
-        MouseArea {
-            anchors.fill: parent
-            onPressed: { parent.focus = true; urlText.color = urlTextColorActive; }
-        }
-
     }
 
 }

@@ -76,8 +76,7 @@ Flickable {
 
         onAlert: console.log(message)
 
-        function doZoom(zoom,centerX,centerY)
-        {
+        function doZoom(zoom,centerX,centerY) {
             if (centerX) {
                 var sc = zoom*contentsScale;
                 scaleAnim.to = sc;
@@ -112,13 +111,13 @@ Flickable {
             if (url != null) { header.editUrl = url.toString(); }
         }
         onDoubleClick: {
-                        if (!heuristicZoom(clickX,clickY,2.5)) {
-                            var zf = flickable.width / contentsSize.width
-                            if (zf >= contentsScale)
-                                zf = 2.0/zoomFactor // zoom in (else zooming out)
-                            doZoom(zf,clickX*zf,clickY*zf)
-                         }
-                       }
+            if (!heuristicZoom(clickX,clickY,2.5)) {
+                var zf = flickable.width / contentsSize.width
+                if (zf >= contentsScale)
+                    zf = 2.0/zoomFactor // zoom in (else zooming out)
+                doZoom(zf,clickX*zf,clickY*zf)
+             }
+        }
 
         SequentialAnimation {
             id: quickZoom
@@ -238,49 +237,6 @@ Flickable {
             }
             PropertyAction { target: webView; property: "renderingEnabled"; value: true }
         }
-
-//    SequentialAnimation on x {
-//        id: nextAnimation; running: false
-//        PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-//        NumberAnimation { from: 0; to: -webBrowser.width; duration: 300; easing.type: Easing.InQuad }
-//        NumberAnimation { from: webBrowser.width; to: 0; duration: 300; easing.type: Easing.OutQuad }
-//        PropertyAction { target: webView; property: "renderingEnabled"; value: true }
-//    }
-
-//    SequentialAnimation on x {
-//        id: backAnimation; running: false
-//        PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-//        NumberAnimation { from: 0; to: webBrowser.width*2; duration: 300; easing.type: Easing.InQuad }
-//        NumberAnimation { from: -webBrowser.width; to: 0; duration: 300; easing.type: Easing.OutQuad }
-//        PropertyAction { target: webView; property: "renderingEnabled"; value: true }
-//    }
-
-// Alternative approach using states and transitions
-
-//    states: [
-//        State {
-//            name: "left"
-//            PropertyChanges { target: webView; x: -webBrowser.width }
-//        },
-//        State {
-//            name: "center"
-//            PropertyChanges { target: webView; x: 0 }
-//        },
-//        State {
-//            name: "right"
-//            PropertyChanges { target: webView; x: webBrowser.width }
-//        }
-//    ]
-
-//    transitions: [
-//        Transition {
-//            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-//            NumberAnimation { properties: "x"; duration: 500; easing.type: Easing.InOutQuad }
-//            NumberAnimation { properties: "y"; duration: 100 }
-//            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
-//        }
-//    ]
-
     }
 
 }
