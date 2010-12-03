@@ -48,7 +48,7 @@ import "js/webbrowser.js" as JS
 Rectangle {
     id: webBrowser
     property variant theme: chromiumTheme
-    property string urlString : "http://www.w3.org/"
+    property string urlString : "www.w3.org"
     width: 800; height: 480
     color: webBrowser.theme.backgroundColor
 

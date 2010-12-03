@@ -41,6 +41,8 @@
 
 import Qt 4.7
 import QtWebKit 1.0
+import "../js/webbrowser.js" as JS
+
 
 Flickable {
     property alias title: webView.title
@@ -108,7 +110,7 @@ Flickable {
             // got to topleft
             flickable.contentX = 0
             flickable.contentY = 0
-            if (url != null) { header.editUrl = url.toString(); }
+            if (url != null) header.editUrl = JS.getPrettyUrl(url)
         }
         onDoubleClick: {
             if (!heuristicZoom(clickX,clickY,2.5)) {
