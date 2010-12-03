@@ -43,6 +43,7 @@ import Qt 4.7
 import QtWebKit 1.0
 
 import "qml"
+import "js/webbrowser.js" as JS
 
 Rectangle {
     id: webBrowser
@@ -56,7 +57,7 @@ Rectangle {
 
     FlickableWebView {
         id: webView
-        url: webBrowser.urlString
+        url: JS.addScheme(webBrowser.urlString)
         onProgressChanged: header.urlChanged = false
         anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
     }

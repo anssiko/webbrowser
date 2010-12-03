@@ -89,8 +89,9 @@ Image {
             Button {
                 id: reloadButton
                 anchors { left: nextButton.right; leftMargin: 20 }
+                onClicked: { webBrowser.urlString = editUrl }
                 action: webView.reload; image: webBrowser.theme.reloadButton
-                visible: webView.progress == 1.0 && !header.urlChanged
+                visible: webView.progress == 1.0
             }
 
             Button {
@@ -105,24 +106,18 @@ Image {
                 anchors { left: reloadButton.right; right: quitButton.left; rightMargin: 10 }
                 image: webBrowser.theme.urlInput
                 onUrlEntered: {
-                    webBrowser.urlString = addScheme(url)
+                    webBrowser.urlString = url
                     webBrowser.focus = true
                     header.urlChanged = false
                 }
                 onUrlChanged: header.urlChanged = true
-                function addScheme(url) {
-                    if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) return url
-                    else if (url.indexOf("/") == 0) return "file://" + url
-                    else if (url.indexOf(".") != -1) return "http://" + url
-                    else return "http://www.google.com/search?q=" + url
-                }
             }
 
             Button {
                 id: goButton
                 anchors { right: quitButton.left; rightMargin: 15 }
                 onClicked: {
-                    webBrowser.urlString = urlInput.addScheme(urlInput.url)
+                    webBrowser.urlString = urlInput.url
                     webBrowser.focus = true
                     header.urlChanged = false
                 }
