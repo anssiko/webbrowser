@@ -17,3 +17,16 @@ function getPrettyUrl(url) {
     }
     return prettyUrl;
 }
+
+function onKeyPressed(event) {
+    switch (event.key) {
+        // backspace - go back in navigation history
+        case 16777219:
+            webView.back();
+            break;
+        // L - focus on the location field
+        case 76:
+            console.log("TODO - implement urlInput.cursorVisible + scroll to top");
+            break;
+    }
+}

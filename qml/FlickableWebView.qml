@@ -97,7 +97,7 @@ Flickable {
         Keys.onUpPressed: scrollUp.start()
         Keys.onDownPressed: scrollDown.start()
         Keys.onSpacePressed: scrollPageDown.start()
-        Keys.onPressed: { if (event.key === 16777219) webView.back(); }
+        Keys.onPressed: JS.onKeyPressed(event)
 
         preferredWidth: flickable.width
         preferredHeight: flickable.height
