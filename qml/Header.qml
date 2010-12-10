@@ -128,12 +128,8 @@ Image {
                 id: quitButton
                 anchors { right: parent.right; rightMargin: 10 }
                 image: webBrowser.theme.quitButton
-                MouseArea {
-                    anchors.fill:  parent
-                    onClicked: Qt.quit()
-                }
+                onClicked: Qt.quit()
             }
-
         }
     }
 

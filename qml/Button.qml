@@ -52,9 +52,11 @@ Item {
     Image {
         id: icon; anchors.centerIn: parent
         opacity: if (action != undefined) { action.enabled ? 1.0 : 0.4 } else 1
+        smooth: true
     }
 
     MouseArea {
+        id: buttonMouseArea
         anchors { fill: parent; topMargin: -10; bottomMargin: -10 }
         onClicked: {
             if (action != undefined)
@@ -62,4 +64,21 @@ Item {
             parent.clicked()
         }
     }
+
+    states: [
+        State {
+            name: "pressed"
+            when: buttonMouseArea.pressed == true
+            PropertyChanges { target: icon; scale: 1.4 }
+        }
+    ]
+    transitions: [
+        Transition {
+            from: "*"; to: "pressed"
+            reversible: true
+            NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuad }
+        }
+    ]
+
+
 }
