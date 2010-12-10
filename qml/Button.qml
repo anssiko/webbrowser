@@ -44,6 +44,7 @@ import Qt 4.7
 Item {
     property alias image: icon.source
     property variant action
+    property variant animation
 
     signal clicked
 
@@ -53,23 +54,46 @@ Item {
         id: icon; anchors.centerIn: parent
         opacity: if (action != undefined) { action.enabled ? 1.0 : 0.4 } else 1
         smooth: true
+        // Button animation run after default animation
+        states: [
+            State {
+                name: "back";
+                PropertyChanges { target: icon; rotation: -360 }
+            },
+            State {
+                name: "next";
+                PropertyChanges { target: icon; rotation: 360 }
+            }
+
+        ]
+        transitions: [
+            Transition {
+                from: "*"; to: "back,next"
+                NumberAnimation { properties: "rotation" }
+            }
+
+        ]
     }
 
     MouseArea {
         id: buttonMouseArea
         anchors { fill: parent; topMargin: -10; bottomMargin: -10 }
         onClicked: {
-            if (action != undefined) action.trigger()
-            parent.clicked()
+            if (action != undefined) action.trigger();
+            parent.clicked();
+            icon.state = animation;
+        }
+        onReleased: {
+            icon.state = "default"
         }
     }
 
+    // Button default animation
     states: [
         State {
             name: "pressed"
             when: buttonMouseArea.pressed == true
             PropertyChanges { target: icon; scale: 1.4 }
-            // PropertyChanges { target: icon; rotation: 360 }
         }
     ]
 
@@ -78,7 +102,6 @@ Item {
             from: "*"; to: "pressed"
             reversible: true
             NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuad }
-            // NumberAnimation { properties: "rotation" }
         }
     ]
 

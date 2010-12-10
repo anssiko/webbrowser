@@ -78,12 +78,14 @@ Image {
                 id: backButton
                 anchors { left: parent.left; bottom: parent.bottom; leftMargin: 15 }
                 action: webView.back; image: webBrowser.theme.backButton
+                animation: "back"
             }
 
             Button {
                 id: nextButton
                 anchors { left: backButton.right; leftMargin: 15 }
                 action: webView.forward; image: webBrowser.theme.forwardButton
+                animation: "next"
             }
 
             Button {
@@ -92,6 +94,7 @@ Image {
                 onClicked: { webBrowser.urlString = editUrl }
                 action: webView.reload; image: webBrowser.theme.reloadButton
                 visible: webView.progress == 1.0
+                animation: "reload"
             }
 
             Button {
@@ -99,6 +102,7 @@ Image {
                 anchors { left: nextButton.right; leftMargin: 20 }
                 action: webView.stop; image: webBrowser.theme.stopButton
                 visible: webView.progress < 1.0 && !header.urlChanged
+                animation: "stop"
             }
 
             UrlInput {
