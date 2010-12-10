@@ -54,21 +54,29 @@ Item {
         id: icon; anchors.centerIn: parent
         opacity: if (action != undefined) { action.enabled ? 1.0 : 0.4 } else 1
         smooth: true
-        // Button animation run after default animation
+        // Extra Button animation run after default animation
         states: [
             State {
                 name: "back";
+                //PropertyChanges { target: icon; x: 100; y: 100 }
                 PropertyChanges { target: icon; rotation: -360 }
             },
             State {
                 name: "next";
                 PropertyChanges { target: icon; rotation: 360 }
+            },
+            State {
+                name: "reload";
+                PropertyChanges { target: icon; rotation: 360 }
             }
-
         ]
         transitions: [
             Transition {
                 from: "*"; to: "back,next"
+                NumberAnimation { properties: "rotation" }
+            },
+            Transition {
+                from: "*"; to: "reload"
                 NumberAnimation { properties: "rotation" }
             }
 
@@ -84,7 +92,8 @@ Item {
             icon.state = animation;
         }
         onReleased: {
-            icon.state = "default"
+            icon.state = ""
+            console.log("released");
         }
     }
 
