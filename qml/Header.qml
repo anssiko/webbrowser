@@ -40,12 +40,14 @@
 ****************************************************************************/
 
 import Qt 4.7
+import "../js/webbrowser.js" as JS
 
 Image {
     id: header
 
     property alias editUrl: urlInput.url
     property bool urlChanged: false
+    property bool reloadVisible: false
 
     source: webBrowser.theme.titleBarBackground
     fillMode: Image.TileHorizontally
@@ -93,15 +95,21 @@ Image {
                 anchors { left: nextButton.right; leftMargin: 20 }
                 onClicked: { webBrowser.urlString = editUrl }
                 action: webView.reload; image: webBrowser.theme.reloadButton
-                visible: webView.progress == 1.0
+                visible: reloadVisible = isReloadVisible()
                 animation: "reload"
+                function isReloadVisible() {
+                    if (webView.progress == 1.0) return true;
+                    if (action != undefined) {
+                        return (action.enabled) ? true : false;
+                    } else return true;
+                }
             }
 
             Button {
                 id: stopButton
                 anchors { left: nextButton.right; leftMargin: 20 }
                 action: webView.stop; image: webBrowser.theme.stopButton
-                visible: webView.progress < 1.0 && !header.urlChanged
+                visible: !reloadVisible
                 animation: "stop"
             }
 

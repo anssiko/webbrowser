@@ -68,6 +68,9 @@ Item {
             State {
                 name: "reload";
                 PropertyChanges { target: icon; rotation: 360 }
+            },
+            State {
+                name: "stop";
             }
         ]
         transitions: [
@@ -76,8 +79,8 @@ Item {
                 NumberAnimation { properties: "rotation" }
             },
             Transition {
-                from: "*"; to: "reload"
-                NumberAnimation { properties: "rotation" }
+                from: "*"; to: "reload,stop"
+                NumberAnimation { properties: "rotation,opacity" }
             }
 
         ]
@@ -93,7 +96,6 @@ Item {
         }
         onReleased: {
             icon.state = ""
-            console.log("released");
         }
     }
 
