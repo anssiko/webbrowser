@@ -95,7 +95,7 @@ Image {
                 anchors { left: nextButton.right; leftMargin: 20 }
                 onClicked: { webBrowser.urlString = editUrl }
                 action: webView.reload; image: webBrowser.theme.reloadButton
-                visible: reloadVisible = isReloadVisible()
+                visible: isReloadVisible()
                 animation: "reload"
                 function isReloadVisible() {
                     if (webView.progress == 1.0) return true;
@@ -109,7 +109,7 @@ Image {
                 id: stopButton
                 anchors { left: nextButton.right; leftMargin: 20 }
                 action: webView.stop; image: webBrowser.theme.stopButton
-                visible: !reloadVisible
+                visible: !reloadButton.visible
                 animation: "stop"
             }
 

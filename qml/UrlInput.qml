@@ -64,6 +64,8 @@ Item {
         x: 12; height: 22; color: "#b5d5ff"
         width: (bg.width - 20) * webView.progress
         opacity: webView.progress == 1.0 ? 0.0 : 1.0
+        //Behavior on width { SmoothedAnimation { velocity: 1000; maximumEasingTime: 160 } }
+        //ColorAnimation on color { from: "white"; to: "#b5d5ff"; duration: 250 }
     }
 
     TextInput {
