@@ -59,8 +59,7 @@ Item {
         id: buttonMouseArea
         anchors { fill: parent; topMargin: -10; bottomMargin: -10 }
         onClicked: {
-            if (action != undefined)
-                action.trigger()
+            if (action != undefined) action.trigger()
             parent.clicked()
         }
     }
@@ -70,15 +69,17 @@ Item {
             name: "pressed"
             when: buttonMouseArea.pressed == true
             PropertyChanges { target: icon; scale: 1.4 }
+            // PropertyChanges { target: icon; rotation: 360 }
         }
     ]
+
     transitions: [
         Transition {
             from: "*"; to: "pressed"
             reversible: true
             NumberAnimation { properties: "scale"; easing.type: Easing.InOutQuad }
+            // NumberAnimation { properties: "rotation" }
         }
     ]
-
 
 }

@@ -76,8 +76,8 @@ Image {
 
             Button {
                 id: backButton
-                action: webView.back; image: webBrowser.theme.backButton
                 anchors { left: parent.left; bottom: parent.bottom; leftMargin: 15 }
+                action: webView.back; image: webBrowser.theme.backButton
             }
 
             Button {
@@ -130,6 +130,7 @@ Image {
                 image: webBrowser.theme.quitButton
                 onClicked: Qt.quit()
             }
+
         }
     }
 
