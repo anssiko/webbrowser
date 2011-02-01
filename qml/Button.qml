@@ -92,7 +92,6 @@ Item {
         onClicked: {
             if (action != undefined) action.trigger();
             parent.clicked();
-            icon.state = animation;
         }
         onReleased: {
             icon.state = ""
