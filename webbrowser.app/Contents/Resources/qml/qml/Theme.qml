@@ -1,7 +1,7 @@
 import Qt 4.7
 
 Item {
-    property string path: "images/theme/default/"
+    property string path: "../images/theme/default/"
     property string titleBarBackground: path + "titlebar-bg.png"
     property string backButton: path + "go-previous-view.png"
     property string forwardButton: path + "go-next-view.png"

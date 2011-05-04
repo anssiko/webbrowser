@@ -2,7 +2,7 @@ import Qt 4.7
 
 Theme {
     // http://src.chromium.org/viewvc/chrome/trunk/src/chrome/app/theme/
-    path: "images/theme/chromium/"
+    path: "../images/theme/chromium/"
     titleBarBackground: path + "titlebar-bg.png"
     urlInput: path + "display.png"
     backButton: path + "back-big.png"

@@ -40,7 +40,7 @@
 ****************************************************************************/
 
 import Qt 4.7
-import "js/webbrowser.js" as JS
+import "../js/webbrowser.js" as JS
 
 Image {
     id: header

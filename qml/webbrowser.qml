@@ -42,8 +42,8 @@
 import Qt 4.7
 import QtWebKit 1.0
 
-import "qml"
-import "js/webbrowser.js" as JS
+import "content"
+import "content/js/webbrowser.js" as JS
 
 Rectangle {
     id: webBrowser

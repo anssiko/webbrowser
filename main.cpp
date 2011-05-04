@@ -1,13 +1,14 @@
-#include <QApplication>
-#include <QDeclarativeView>
+#include <QtGui/QApplication>
+#include "qmlapplicationviewer.h"
 
- int main(int argc, char *argv[])
- {
-     QApplication app(argc, argv);
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
 
-     QDeclarativeView view;
-     view.setSource(QUrl::fromLocalFile("webbrowser.qml"));
-     view.show();
+    QmlApplicationViewer viewer;
+    //viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockPortrait);
+    viewer.setMainQmlFile(QLatin1String("qml/qml/webbrowser.qml"));
+    viewer.showExpanded();
 
-     return app.exec();
- }
+    return app.exec();
+}

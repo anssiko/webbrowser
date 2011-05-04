@@ -41,7 +41,7 @@
 
 import Qt 4.7
 import QtWebKit 1.0
-import "js/webbrowser.js" as JS
+import "../js/webbrowser.js" as JS
 
 
 Flickable {
