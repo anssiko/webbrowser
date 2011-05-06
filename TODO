@@ -1,14 +1,16 @@
 TODO
 
 * intro website:
-   * standards-compliance: html5test.com, modernizr.com, ACID3
-   * cross-platform: Symbian, Maemo 5
-   * simple UI
+   * standards-compliant: html5test.com, modernizr.com, ACID3
+   * cross-platform: Symbian^3, Symbian^1, Maemo 5
+   * simple touch UI
+   * flickable
    * auto-rotate
    * Google search
-   * flickable
 
 * smartinstaller
+
+* start page
 
 * pinch zoom
 
