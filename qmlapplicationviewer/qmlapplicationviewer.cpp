@@ -148,7 +148,9 @@ void QmlApplicationViewer::showExpanded()
 #ifdef Q_OS_SYMBIAN
     showFullScreen();
 #elif defined(Q_WS_MAEMO_5) || defined(Q_WS_MAEMO_6)
-    showMaximized();
+    // showMaximized();
+    // show the full screen without the toolbar
+    showFullScreen();
 #else
     show();
 #endif
