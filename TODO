@@ -1,6 +1,13 @@
 TODO
 
-* intro website: html5test.com, modernizr.com
+* intro website:
+   * standards-compliance: html5test.com, modernizr.com
+   * cross-platform: Symbian, Maemo 5
+   * auto-rotate
+   * Google search
+   * flickable
+
+* pinch zoom
 
 * icons, application name
 
