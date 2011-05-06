@@ -78,7 +78,8 @@ for(deploymentfolder, DEPLOYMENTFOLDERS) {
 MAINPROFILEPWD = $$PWD
 
 symbian {
-    isEmpty(ICON):exists($${TARGET}.svg):ICON = $${TARGET}.svg
+    #isEmpty(ICON):exists($${TARGET}.svg):ICON = $${TARGET}.svg
+    isEmpty(ICON):exists(webbrowser.svg):ICON = webbrowser.svg
     isEmpty(TARGET.EPOCHEAPSIZE):TARGET.EPOCHEAPSIZE = 0x20000 0x2000000
 } else:win32 {
     copyCommand =

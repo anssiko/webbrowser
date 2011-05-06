@@ -11,6 +11,9 @@ DEFINES += NETWORKACCESS
 
 symbian:TARGET.UID3 = 0xE1704EEA
 
+# Application name
+symbian:TARGET = Web
+
 # Allow network access on Symbian
 symbian:TARGET.CAPABILITY += NetworkServices
 
