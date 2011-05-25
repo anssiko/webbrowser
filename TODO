@@ -12,9 +12,9 @@ TODO
 
 * pinch zoom
 
-* Cursor navigation: http://doc.qt.nokia.com/4.7/qml-keynavigation.html
+* Cursor navigation (http://doc.qt.nokia.com/4.7/qml-keynavigation.html)
 
-* navigation history as a tree visualization
+* navigation history tree visualization
 
 * tabs?
 
