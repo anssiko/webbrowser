@@ -23,8 +23,7 @@ Things to Do
 ================
 
 * Start page
-* Pinch zoom
-* Cursor navigation (http://doc.qt.nokia.com/4.7/qml-keynavigation.html)
+* Better pinch zoom
 * Navigation history tree visualization
 
 Known Issues

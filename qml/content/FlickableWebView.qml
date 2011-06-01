@@ -41,6 +41,8 @@
 
 import Qt 4.7
 import QtWebKit 1.0
+// experimental
+import Qt.labs.gestures 2.0
 import "js/webbrowser.js" as JS
 
 
@@ -64,6 +66,13 @@ Flickable {
     anchors.right: parent.right
     pressDelay: 200
 
+    GestureArea {
+        anchors.fill: parent
+        onPinch: {
+            webView.doZoom(gesture.scaleFactor.toFixed(1), gesture.centerPoint.x, gesture.centerPoint.y)
+        }
+    }
+
     onWidthChanged : {
         // Expand (but not above 1:1) if otherwise would be smaller that available width.
         if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
@@ -72,6 +81,7 @@ Flickable {
 
     WebView {
         id: webView
+        settings.pluginsEnabled: false
         transformOrigin: Item.TopLeft
         smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
         focus: true
