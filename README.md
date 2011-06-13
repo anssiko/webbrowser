@@ -3,6 +3,21 @@ Web [Browser]
 
 A fork of the Qt/QML web browser demo (http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser).
 
+Installation
+================
+
+Symbian^3
+----------------
+
+* Install Qt 4.7.3 (qt.sis) and QtWebKit (qtwebkit.sis) e.g. from http://fixqt.com/
+* Install build/{yyyy-mm-dd}/web-symbian3.sis
+
+Maemo 5
+----------------
+
+* Make sure you have the Maemo 5 PR1.3 update
+* Install build/{yyyy-mm-dd}/web-maemo5.deb
+
 Features
 ================
 
