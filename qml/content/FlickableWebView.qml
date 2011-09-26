@@ -39,12 +39,9 @@
 **
 ****************************************************************************/
 
-import Qt 4.7
+import QtQuick 1.1
 import QtWebKit 1.0
-// experimental
-import Qt.labs.gestures 2.0
 import "js/webbrowser.js" as JS
-
 
 Flickable {
     property alias title: webView.title
@@ -65,13 +62,6 @@ Flickable {
     anchors.left: parent.left
     anchors.right: parent.right
     pressDelay: 200
-
-    GestureArea {
-        anchors.fill: parent
-        onPinch: {
-            webView.doZoom(gesture.scaleFactor.toFixed(1), gesture.centerPoint.x, gesture.centerPoint.y)
-        }
-    }
 
     onWidthChanged : {
         // Expand (but not above 1:1) if otherwise would be smaller that available width.

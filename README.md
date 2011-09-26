@@ -6,17 +6,24 @@ A fork of the Qt/QML web browser demo (http://qt.gitorious.org/qt/qt/trees/4.7/d
 Installation
 ================
 
+Symbian Belle
+----------------
+
+* Install build/{yyyy-mm-dd}-web-symbian-belle.sis
+
+(Symbian Belle devices contain Qt 4.7.4 and Qt Mobility 1.2.1 libraries as part of device firmware)
+
 Symbian^3
 ----------------
 
 * Install Qt 4.7.3 (qt.sis) and QtWebKit (qtwebkit.sis) e.g. from http://fixqt.com/
-* Install build/{yyyy-mm-dd}/web-symbian3.sis
+* Install build/{yyyy-mm-dd}-web-symbian3.sis
 
 Maemo 5
 ----------------
 
 * Make sure you have the Maemo 5 PR1.3 update
-* Install build/{yyyy-mm-dd}/web-maemo5.deb
+* Install build/{yyyy-mm-dd}-web-maemo5.deb
 
 Features
 ================
@@ -38,7 +45,7 @@ Things to Do
 ================
 
 * Start page
-* Better pinch zoom
+* Pinch gesture support via [PinchArea](http://doc.qt.nokia.com/4.7-snapshot/qml-pincharea.html)
 * Navigation history tree visualization
 
 Known Issues
