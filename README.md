@@ -6,6 +6,18 @@ A fork of the Qt/QML web browser demo (http://qt.gitorious.org/qt/qt/trees/4.7/d
 Installation
 ================
 
+Maemo 6 aka MeeGo 1.2 Harmattan
+----------------
+
+* Make sure you have installed the MeeGo 1.2 Harmattan PR1.1 update to the device
+* Install build/{yyyy-mm-dd}-web-maemo6.deb
+
+Maemo 5
+----------------
+
+* Make sure you have installed the Maemo 5 PR1.3 update to the device
+* Install build/{yyyy-mm-dd}-web-maemo5.deb
+
 Symbian Belle
 ----------------
 
@@ -18,12 +30,6 @@ Symbian^3
 
 * Install Qt 4.7.3 (qt.sis) and QtWebKit (qtwebkit.sis) e.g. from http://fixqt.com/
 * Install build/{yyyy-mm-dd}-web-symbian3.sis
-
-Maemo 5
-----------------
-
-* Make sure you have the Maemo 5 PR1.3 update
-* Install build/{yyyy-mm-dd}-web-maemo5.deb
 
 Features
 ================

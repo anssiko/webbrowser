@@ -33,3 +33,15 @@ SOURCES += main.cpp
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
+
+contains(MEEGO_EDITION,harmattan) {
+    desktopfile.files = $${TARGET}_harmattan.desktop
+    desktopfile.path = /usr/share/applications
+    INSTALLS += desktopfile
+}
+
+contains(MEEGO_EDITION,harmattan) {
+    icon.files = webbrowser.png
+    icon.path = /usr/share/icons/hicolor/80x80/apps
+    INSTALLS += icon
+}
