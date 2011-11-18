@@ -6,7 +6,7 @@ A fork of the Qt/QML web browser demo (http://qt.gitorious.org/qt/qt/trees/4.7/d
 Installation
 ================
 
-Maemo 6 aka MeeGo 1.2 Harmattan
+MeeGo 1.2 Harmattan (Maemo 6)
 ----------------
 
 * Make sure you have installed the MeeGo 1.2 Harmattan PR1.1 update to the device
@@ -37,7 +37,7 @@ Features
 Features inherited from Qt:
 
 * Standards-compliant (see: html5test.com, acid3.acidtests.org, modernizr.com)
-* Cross-platform (mobile: Symbian^3, Symbian^1, Maemo 5; desktop: OS X, Linux, Windows)
+* Cross-platform (mobile: Symbian^3, Symbian^1, MeeGo 1.2 Harmattan (Maemo 6), Maemo 5; desktop: OS X, Linux, Windows)
 
 Features added on top of the demo web browser:
 
