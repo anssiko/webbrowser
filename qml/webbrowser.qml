@@ -81,7 +81,6 @@ Rectangle {
     }
 
     Battery {
-        // initialize Battery Status API QtMobility backend
+        id: battery
     }
-
 }

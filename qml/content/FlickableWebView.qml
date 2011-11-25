@@ -76,6 +76,25 @@ Flickable {
         smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
         focus: true
 
+        javaScriptWindowObjects: QtObject {
+            WebView.windowObjectName: "battery"
+            function update(level) {
+                return '{ level: ' + level  + ' }';
+            }
+        }
+
+        onLoadFinished: evaluateJavaScript("document.title = battery.update(" + battery.level + ");")
+
+        // TODO: timer is a hack
+        Timer {
+            interval: 1000
+            running: true
+            repeat: true
+            onTriggered: {
+                parent.evaluateJavaScript("document.title = battery.update(" + battery.level + ");");
+            }
+        }
+
         onAlert: console.log(message)
 
         function doZoom(zoom,centerX,centerY) {

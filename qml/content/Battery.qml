@@ -2,6 +2,8 @@ import QtQuick 1.1
 import QtMobility.systeminfo 1.2
 
 DeviceInfo {
+    property alias level: info.batteryLevel
+
     id: info
     monitorBatteryLevelChanges: true
     monitorBatteryStatusChanges: true
