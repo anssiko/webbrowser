@@ -80,4 +80,8 @@ Rectangle {
         anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
     }
 
+    Battery {
+        // initialize Battery Status API QtMobility backend
+    }
+
 }
