@@ -49,6 +49,7 @@ Rectangle {
     id: webBrowser
     property variant theme: chromiumTheme
     property string urlString : "www.w3.org"
+    // property string urlString : "people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
     width: 800; height: 480
     color: webBrowser.theme.backgroundColor
 

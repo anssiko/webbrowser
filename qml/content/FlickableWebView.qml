@@ -78,12 +78,16 @@ Flickable {
 
         javaScriptWindowObjects: QtObject {
             WebView.windowObjectName: "battery"
-            function update(level) {
-                return '{ level: ' + level  + ' }';
+            function update(level, charging) {
+                console.log("{ level: " + level  + ", charging: " + charging + " }");
+                return "{ level: " + level  + ", charging: " + charging + " }";
             }
         }
 
-        onLoadFinished: evaluateJavaScript("document.title = battery.update(" + battery.level + ");")
+        onLoadFinished: {
+            evaluateJavaScript(
+                "document.title = battery.update(" + battery.level + ", " + battery.charging + ");")
+        }
 
         // TODO: timer is a hack
         Timer {
@@ -91,7 +95,8 @@ Flickable {
             running: true
             repeat: true
             onTriggered: {
-                parent.evaluateJavaScript("document.title = battery.update(" + battery.level + ");");
+                parent.evaluateJavaScript(
+                    "document.title = battery.update(" + battery.level + ", " + battery.charging + ");");
             }
         }
 
