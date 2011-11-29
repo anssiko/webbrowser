@@ -10,8 +10,10 @@ DeviceInfo {
     monitorBatteryStatusChanges: true
     monitorPowerStateChanges: true
 
-    Component.onCompleted: console.log('DeviceInfo initialized')
-    onBatteryLevelChanged: console.log('battery level: ' + info.batteryLevel)
-    onPowerStateChanged: console.log('power state: ' + info.currentPowerState)
+    signal batteryStatusChanged(string msg)
+
+    Component.onCompleted: batteryStatusChanged("DeviceInfo initialized")
+    onBatteryLevelChanged: batteryStatusChanged("level: " + info.batteryLevel)
+    onPowerStateChanged: batteryStatusChanged("power state: " + info.currentPowerState)
 }
 

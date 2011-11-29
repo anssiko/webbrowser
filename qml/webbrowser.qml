@@ -61,6 +61,10 @@ Rectangle {
         url: JS.addScheme(webBrowser.urlString)
         onProgressChanged: header.urlChanged = false
         anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
+
+        function webViewSays(msg) {
+            console.log("webViewSays: " + msg);
+        }
     }
 
     Item { id: headerSpace; width: parent.width; height: 67; }
@@ -83,5 +87,7 @@ Rectangle {
 
     Battery {
         id: battery
+        //onBatteryStatusChanged: console.log('onBatteryStatusChanged: ' + msg)
+        Component.onCompleted: batteryStatusChanged.connect(webView.webViewSays)
     }
 }

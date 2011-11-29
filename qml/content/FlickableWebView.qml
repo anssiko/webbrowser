@@ -79,7 +79,7 @@ Flickable {
         javaScriptWindowObjects: QtObject {
             WebView.windowObjectName: "battery"
             function update(level, charging) {
-                console.log("{ level: " + level  + ", charging: " + charging + " }");
+                //console.log("{ level: " + level  + ", charging: " + charging + " }");
                 return "{ level: " + level  + ", charging: " + charging + " }";
             }
         }
