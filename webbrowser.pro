@@ -26,6 +26,9 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # MOBILITY variable. 
 CONFIG += mobility
 MOBILITY += systeminfo
+MOBILITY += sensors
+
+HEADERS +=
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp

@@ -40,54 +40,15 @@
 ****************************************************************************/
 
 import QtQuick 1.1
-import QtWebKit 1.0
-
+import com.nokia.meego 1.0
 import "content"
-import "content/js/webbrowser.js" as JS
 
-Rectangle {
-    id: webBrowser
-    property variant theme: chromiumTheme
-    property string urlString : "www.w3.org"
-    // property string urlString : "people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
-    width: 800; height: 480
-    color: webBrowser.theme.backgroundColor
+PageStackWindow {
+    id: appWindow
 
-    Theme { id: defaultTheme }
-    ChromiumTheme { id: chromiumTheme }
+    initialPage: browser
 
-    FlickableWebView {
-        id: webView
-        url: JS.addScheme(webBrowser.urlString)
-        onProgressChanged: header.urlChanged = false
-        anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
-
-        function webViewSays(msg) {
-            console.log("webViewSays: " + msg);
-        }
-    }
-
-    Item { id: headerSpace; width: parent.width; height: 67; }
-
-    Header {
-        id: header
-        editUrl: webBrowser.urlString
-        width: headerSpace.width; height: headerSpace.height
-    }
-
-    ScrollBar {
-        scrollArea: webView; width: 8
-        anchors { right: parent.right; top: header.bottom; bottom: parent.bottom }
-    }
-
-    ScrollBar {
-        scrollArea: webView; height: 8; orientation: Qt.Horizontal
-        anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
-    }
-
-    Battery {
-        id: battery
-        //onBatteryStatusChanged: console.log('onBatteryStatusChanged: ' + msg)
-        Component.onCompleted: batteryStatusChanged.connect(webView.webViewSays)
+    WebBrowser {
+        id: browser
     }
 }
