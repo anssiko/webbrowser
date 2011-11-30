@@ -139,8 +139,10 @@ Flickable {
         onDoubleClick: {
             if (!heuristicZoom(clickX,clickY,2.5)) {
                 var zf = flickable.width / contentsSize.width
-                if (zf >= contentsScale)
+                if (typeof zoomFactor != "undefined" && zf >= contentsScale)
                     zf = 2.0/zoomFactor // zoom in (else zooming out)
+                else if (typeof zoomFactor === "undefined")
+                    zf = 1 // no zoom
                 doZoom(zf,clickX*zf,clickY*zf)
              }
         }

@@ -7,7 +7,6 @@ DeviceInfo {
 
     id: info
     monitorBatteryLevelChanges: true
-    monitorBatteryStatusChanges: true
     monitorPowerStateChanges: true
 
     signal batteryStatusChanged(string msg)
