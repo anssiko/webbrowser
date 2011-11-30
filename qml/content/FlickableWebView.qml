@@ -44,19 +44,19 @@ import QtWebKit 1.0
 import "js/webbrowser.js" as JS
 
 Flickable {
-    property alias title: webView.title
-    property alias icon: webView.icon
-    property alias progress: webView.progress
-    property alias url: webView.url
-    property alias back: webView.back
-    property alias stop: webView.stop
-    property alias reload: webView.reload
-    property alias forward: webView.forward
+    property alias title: viewport.title
+    property alias icon: viewport.icon
+    property alias progress: viewport.progress
+    property alias url: viewport.url
+    property alias back: viewport.back
+    property alias stop: viewport.stop
+    property alias reload: viewport.reload
+    property alias forward: viewport.forward
 
     id: flickable
     width: parent.width
-    contentWidth: Math.max(parent.width,webView.width)
-    contentHeight: Math.max(parent.height,webView.height)
+    contentWidth: Math.max(parent.width,viewport.width)
+    contentHeight: Math.max(parent.height,viewport.height)
     anchors.top: headerSpace.bottom
     anchors.bottom: parent.top
     anchors.left: parent.left
@@ -65,12 +65,12 @@ Flickable {
 
     onWidthChanged : {
         // Expand (but not above 1:1) if otherwise would be smaller that available width.
-        if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
-            webView.contentsScale = width / webView.width * webView.contentsScale;
+        if (width > viewport.width*viewport.contentsScale && viewport.contentsScale < 1.0)
+            viewport.contentsScale = width / viewport.width * viewport.contentsScale;
     }
 
     WebView {
-        id: webView
+        id: viewport
         settings.pluginsEnabled: false
         transformOrigin: Item.TopLeft
         smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
@@ -107,10 +107,10 @@ Flickable {
                 var sc = zoom*contentsScale;
                 scaleAnim.to = sc;
                 flickVX.from = flickable.contentX
-                flickVX.to = Math.max(0,Math.min(centerX-flickable.width/2,webView.width*sc-flickable.width))
+                flickVX.to = Math.max(0,Math.min(centerX-flickable.width/2,viewport.width*sc-flickable.width))
                 finalX.value = flickVX.to
                 flickVY.from = flickable.contentY
-                flickVY.to = Math.max(0,Math.min(centerY-flickable.height/2,webView.height*sc-flickable.height))
+                flickVY.to = Math.max(0,Math.min(centerY-flickable.height/2,viewport.height*sc-flickable.height))
                 finalY.value = flickVY.to
                 quickZoom.start()
             }
@@ -151,14 +151,14 @@ Flickable {
             id: quickZoom
 
             PropertyAction {
-                target: webView
+                target: viewport
                 property: "renderingEnabled"
                 value: false
             }
             ParallelAnimation {
                 NumberAnimation {
                     id: scaleAnim
-                    target: webView
+                    target: viewport
                     property: "contentsScale"
                     // the to property is set before calling
                     easing.type: Easing.Linear
@@ -199,7 +199,7 @@ Flickable {
                 value: 0 // set before calling
             }
             PropertyAction {
-                target: webView
+                target: viewport
                 property: "renderingEnabled"
                 value: true
             }
@@ -208,62 +208,62 @@ Flickable {
 
         SequentialAnimation {
             id: scrollDown; running: false
-            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: false }
             NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY"; from: flickable.contentY;
                 to: {
                     if (flickable.contentY < flickable.contentHeight - webBrowser.height) return flickable.contentY + 200
                     else return flickable.contentHeight - webBrowser.height
                 }
             }
-            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: scrollUp; running: false
-            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: false }
             NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY"; from: flickable.contentY;
                 to: {
                     if (flickable.contentY > 0) return flickable.contentY - 200
                     else return 0
                 }
             }
-            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: scrollPageDown; running: false
-            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: false }
             NumberAnimation { target: flickable; duration: 100; easing.type: Easing.Linear; property: "contentY"; from: flickable.contentY;
                 to: {
                     if (flickable.contentY < flickable.contentHeight - webBrowser.height) return flickable.contentY + webBrowser.height
                     else return flickable.contentHeight - webBrowser.height
                 }
             }
-            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: zoomOut; running: false
-            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale"; from: webView.contentsScale;
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: viewport; duration: 100; easing.type: Easing.Linear; property: "contentsScale"; from: viewport.contentsScale;
                 to: {
-                    if (webView.contentsScale > 0.5) return webView.contentsScale - 0.25
+                    if (viewport.contentsScale > 0.5) return viewport.contentsScale - 0.25
                     else return 0.5
                 }
             }
-            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: true }
         }
 
         SequentialAnimation {
             id: zoomIn; running: false
-            PropertyAction { target: webView; property: "renderingEnabled"; value: false }
-            NumberAnimation { target: webView; duration: 100; easing.type: Easing.Linear; property: "contentsScale"; from: webView.contentsScale;
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: false }
+            NumberAnimation { target: viewport; duration: 100; easing.type: Easing.Linear; property: "contentsScale"; from: viewport.contentsScale;
                 to: {
-                    if (webView.contentsScale < 1.5) return webView.contentsScale + 0.25
+                    if (viewport.contentsScale < 1.5) return viewport.contentsScale + 0.25
                     else return 1.5
                 }
             }
-            PropertyAction { target: webView; property: "renderingEnabled"; value: true }
+            PropertyAction { target: viewport; property: "renderingEnabled"; value: true }
         }
     }
 
