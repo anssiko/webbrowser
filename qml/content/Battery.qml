@@ -12,7 +12,7 @@ DeviceInfo {
     signal batteryStatusChanged(string msg)
 
     Component.onCompleted: batteryStatusChanged("DeviceInfo initialized")
-    onBatteryLevelChanged: batteryStatusChanged("level: " + info.batteryLevel)
-    onPowerStateChanged: batteryStatusChanged("power state: " + info.currentPowerState)
+    onBatteryLevelChanged: batteryStatusChanged("level: " + info.level)
+    onChargingChanged: batteryStatusChanged("charging: " + info.charging)
 }
 
