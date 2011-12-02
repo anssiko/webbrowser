@@ -11,12 +11,10 @@ DeviceInfo {
 
     onLevelChanged: {
         webView.level = level
-        console.log("Battery.onLevelChanged - webView.level: " + webView.level)
     }
 
     onChargingChanged: {
         webView.charging = charging
-        console.log("Battery.onChargingChanged - webView.charging: " + webView.charging)
     }
 }
 

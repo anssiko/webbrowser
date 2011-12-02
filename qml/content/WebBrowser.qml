@@ -50,6 +50,8 @@ Rectangle {
     property string urlString : "www.w3.org"
     // property string urlString : "people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
 
+    property alias activeWebView: webView
+
     width: screen.currentOrientation == !screen.Portrait ? 480 : 854
     height: screen.currentOrientation == !screen.Portrait ? 854 : 480
 
@@ -67,11 +69,17 @@ Rectangle {
         property double level: 1.0
         property bool charging: true
 
+        onLevelChanged: updateBatteryLevel(level)
+        onChargingChanged: updateBatteryCharging(charging)
+
         function updateBatteryLevel(level) {
-            console.log("updateBatteryLevel: " + level);
-            webView.level = 0.5;
-            console.log(webView.level);
+            console.log("updateBatteryLevel: " + webView.level);
         }
+
+        function updateBatteryCharging(charging) {
+            console.log("updateBatteryCharging: " + webView.charging);
+        }
+
     }
 
     Item { id: headerSpace; width: parent.width; height: 67; }
