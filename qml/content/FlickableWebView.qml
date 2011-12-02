@@ -53,6 +53,8 @@ Flickable {
     property alias reload: viewport.reload
     property alias forward: viewport.forward
 
+    property alias viewportInstance: viewport
+
     id: flickable
     width: parent.width
     contentWidth: Math.max(parent.width,viewport.width)
@@ -75,6 +77,9 @@ Flickable {
         transformOrigin: Item.TopLeft
         smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
         focus: true
+
+        property double level: 1.0
+        property bool charging: true
 
         javaScriptWindowObjects: QtObject {
             WebView.windowObjectName: "battery"
@@ -101,6 +106,10 @@ Flickable {
         }
 
         onAlert: console.log(message)
+
+        function say(msg) {
+            console.log("FlickableWebView.viewport say: " + msg);
+        }
 
         function doZoom(zoom,centerX,centerY) {
             if (centerX) {

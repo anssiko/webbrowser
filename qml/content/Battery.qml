@@ -10,11 +10,11 @@ DeviceInfo {
     monitorPowerStateChanges: true
 
     onLevelChanged: {
-        webView.level = level
+        webViewInstance.level = level
     }
 
     onChargingChanged: {
-        webView.charging = charging
+        webViewInstance.charging = charging
     }
 }
 
