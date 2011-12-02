@@ -64,8 +64,13 @@ Rectangle {
         onProgressChanged: header.urlChanged = false
         anchors { top: headerSpace.bottom; left: parent.left; right: parent.right; bottom: parent.bottom }
 
-        function webViewSays(msg) {
-            console.log("webViewSays: " + msg);
+        property double level: 1.0
+        property bool charging: true
+
+        function updateBatteryLevel(level) {
+            console.log("updateBatteryLevel: " + level);
+            webView.level = 0.5;
+            console.log(webView.level);
         }
     }
 
@@ -89,8 +94,6 @@ Rectangle {
 
     Battery {
         id: battery
-        //onBatteryStatusChanged: console.log('onBatteryStatusChanged: ' + msg)
-        Component.onCompleted: batteryStatusChanged.connect(webView.webViewSays)
     }
 
     /*

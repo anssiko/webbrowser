@@ -85,6 +85,7 @@ Flickable {
         }
 
         onLoadFinished: {
+            console.log("onLoadFinished: " + webView.level)
             evaluateJavaScript(
                 "document.title = battery.update(" + battery.level + ", " + battery.charging + ");")
         }

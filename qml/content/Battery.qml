@@ -9,10 +9,14 @@ DeviceInfo {
     monitorBatteryLevelChanges: true
     monitorPowerStateChanges: true
 
-    signal batteryStatusChanged(string msg)
+    onLevelChanged: {
+        webView.level = level
+        console.log("Battery.onLevelChanged - webView.level: " + webView.level)
+    }
 
-    Component.onCompleted: batteryStatusChanged("DeviceInfo initialized")
-    onBatteryLevelChanged: batteryStatusChanged("level: " + info.level)
-    onChargingChanged: batteryStatusChanged("charging: " + info.charging)
+    onChargingChanged: {
+        webView.charging = charging
+        console.log("Battery.onChargingChanged - webView.charging: " + webView.charging)
+    }
 }
 
