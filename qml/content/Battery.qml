@@ -2,7 +2,7 @@ import QtQuick 1.1
 import QtMobility.systeminfo 1.2
 
 DeviceInfo {
-    property alias level: info.batteryLevel
+    property double level: info.batteryLevel/100
     property bool charging: (info.currentPowerState != 1) ? true : false
 
     id: info
