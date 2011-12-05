@@ -82,8 +82,8 @@ Flickable {
         property bool charging: true
 
         javaScriptWindowObjects: QtObject {
-            WebView.windowObjectName: "battery"
-            function update(level, charging) {
+            WebView.windowObjectName: "debug"
+            function log(level, charging) {
                 return "{ level: " + level  + ", charging: " + charging + " }";
             }
         }
@@ -95,13 +95,13 @@ Flickable {
 "                n.battery.onlevelchange = function () { alert('onlevelchange'); };                                             " +
 "                n.battery.onchargingchange = function () { alert('onchargingchange'); };                                       " +
 "            })(window.navigator);                                                                                              " +
-"            document.title = battery.update(navigator.battery.level, navigator.battery.charging);                              ")
+"            document.title = debug.log(navigator.battery.level, navigator.battery.charging);                              ")
         }
 
         onLevelChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.level = " + level + ";" +
-            "document.title = battery.update(navigator.battery.level, navigator.battery.charging);" +
+            "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
             "if (typeof navigator.battery.onlevelchange != null) navigator.battery.onlevelchange()"
             )
         }
@@ -109,7 +109,7 @@ Flickable {
         onChargingChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.charging = " + charging + ";" +
-            "document.title = battery.update(navigator.battery.level, navigator.battery.charging);" +
+            "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
             "if (typeof navigator.battery.onchargingchange != null) navigator.battery.onchargingchange()")
         }
 
