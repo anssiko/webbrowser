@@ -84,30 +84,33 @@ Flickable {
         javaScriptWindowObjects: QtObject {
             WebView.windowObjectName: "battery"
             function update(level, charging) {
-                //console.log("{ level: " + level  + ", charging: " + charging + " }");
                 return "{ level: " + level  + ", charging: " + charging + " }";
             }
         }
 
         onLoadFinished: {
             viewport.evaluateJavaScript(
-                "navigator.battery = { level: " + level + ", charging: " + charging +" };" +
+                "navigator.battery = { level: " + level + ", charging: " + charging +", onlevelchange: null, onchargingchange: null };" +
+                "navigator.battery.onlevelchange = function () { alert('onlevelchange'); };" +
+                "navigator.battery.onchargingchange = function () { alert('onchargingchange'); };" +
                 "document.title = battery.update(navigator.battery.level, navigator.battery.charging);")
         }
 
         onLevelChanged: {
             viewport.evaluateJavaScript(
                 "navigator.battery.level = " + level + ";" +
-                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);")
+                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);" +
+                "if (typeof navigator.battery.onlevelchange != null) navigator.battery.onlevelchange()")
         }
 
         onChargingChanged: {
             viewport.evaluateJavaScript(
                 "navigator.battery.charging = " + charging + ";" +
-                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);")
+                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);" +
+                "if (typeof navigator.battery.onchargingchange != null) navigator.battery.onchargingchange()")
         }
 
-        onAlert: console.log(message)
+        onAlert: console.log("alert('" + message + "')")
 
         function doZoom(zoom,centerX,centerY) {
             if (centerX) {
