@@ -91,17 +91,20 @@ Flickable {
 
         onLoadFinished: {
             viewport.evaluateJavaScript(
-                "document.title = battery.update(" + level + ", " + charging + ");")
+                "navigator.battery = { level: " + level + ", charging: " + charging +" };" +
+                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);")
         }
 
         onLevelChanged: {
             viewport.evaluateJavaScript(
-                "document.title = battery.update(" + level + ", " + charging + ");")
+                "navigator.battery.level = " + level + ";" +
+                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);")
         }
 
         onChargingChanged: {
             viewport.evaluateJavaScript(
-                "document.title = battery.update(" + level + ", " + charging + ");")
+                "navigator.battery.charging = " + charging + ";" +
+                "document.title = battery.update(navigator.battery.level, navigator.battery.charging);")
         }
 
         onAlert: console.log(message)
