@@ -90,11 +90,11 @@ Flickable {
 
         onLoadFinished: {
             viewport.evaluateJavaScript(
-"            (function(n) {                                                                                                     " +
-"                n.battery = { level: " + level + ", charging: " + charging + ", onlevelchange: null, onchargingchange: null }; " +
-"                n.mozBattery = n.battery;                                                                                      " +
-"            })(window.navigator);                                                                                              " +
-"            document.title = debug.log(navigator.battery.level, navigator.battery.charging);")
+            "(function(n) {                                                                                                     " +
+            "    n.battery = { level: " + level + ", charging: " + charging + ", onlevelchange: null, onchargingchange: null }; " +
+            "    n.mozBattery = n.battery;                                                                                      " +
+            "})(window.navigator);                                                                                              " +
+            "document.title = debug.log(navigator.battery.level, navigator.battery.charging);")
         }
 
         onLevelChanged: {
@@ -102,7 +102,7 @@ Flickable {
             "navigator.battery.level = " + level + ";" +
             "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
             // TODO: fix on* handlers
-            //"try { navigator.battery.onlevelchange(); } catch () { alert('onlevelchange handler undefined'); };"
+            //"try { navigator.battery.onlevelchange(); } catch () { alert('onlevelchange handler undefined'); };" +
             "")
         }
 
@@ -110,7 +110,7 @@ Flickable {
             viewport.evaluateJavaScript(
             "navigator.battery.charging = " + charging + ";" +
             "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
-            //"try { navigator.battery.onchargingchange(); } catch () { alert('onchargingchange handler undefined'); };"
+            //"try { navigator.battery.onchargingchange(); } catch () { alert('onchargingchange handler undefined'); };" +
             "")
         }
 
