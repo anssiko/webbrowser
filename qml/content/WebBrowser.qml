@@ -69,15 +69,8 @@ Rectangle {
         property double level: 1.0
         property bool charging: true
 
-        onLevelChanged: {
-            viewportInstance.level = level
-            console.log("updateBatteryLevel: " + viewportInstance.level);
-        }
-
-        onChargingChanged: {
-            viewportInstance.charging = charging
-            console.log("updateBatteryCharging: " + viewportInstance.charging);
-        }
+        onLevelChanged: viewportInstance.level = level
+        onChargingChanged: viewportInstance.charging = charging
     }
 
     Item { id: headerSpace; width: parent.width; height: 67; }

@@ -90,26 +90,21 @@ Flickable {
         }
 
         onLoadFinished: {
-            evaluateJavaScript(
-                "document.title = battery.update(" + battery.level + ", " + battery.charging + ");")
+            viewport.evaluateJavaScript(
+                "document.title = battery.update(" + level + ", " + charging + ");")
         }
 
-        // TODO: timer is a hack
-        Timer {
-            interval: 1000
-            running: true
-            repeat: true
-            onTriggered: {
-                parent.evaluateJavaScript(
-                    "document.title = battery.update(" + battery.level + ", " + battery.charging + ");");
-            }
+        onLevelChanged: {
+            viewport.evaluateJavaScript(
+                "document.title = battery.update(" + level + ", " + charging + ");")
+        }
+
+        onChargingChanged: {
+            viewport.evaluateJavaScript(
+                "document.title = battery.update(" + level + ", " + charging + ");")
         }
 
         onAlert: console.log(message)
-
-        function say(msg) {
-            console.log("FlickableWebView.viewport say: " + msg);
-        }
 
         function doZoom(zoom,centerX,centerY) {
             if (centerX) {
