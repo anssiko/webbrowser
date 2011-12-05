@@ -92,25 +92,26 @@ Flickable {
             viewport.evaluateJavaScript(
 "            (function(n) {                                                                                                     " +
 "                n.battery = { level: " + level + ", charging: " + charging + ", onlevelchange: null, onchargingchange: null }; " +
-"                n.battery.onlevelchange = function () { alert('onlevelchange'); };                                             " +
-"                n.battery.onchargingchange = function () { alert('onchargingchange'); };                                       " +
+"                n.mozBattery = n.battery;                                                                                      " +
 "            })(window.navigator);                                                                                              " +
-"            document.title = debug.log(navigator.battery.level, navigator.battery.charging);                              ")
+"            document.title = debug.log(navigator.battery.level, navigator.battery.charging);")
         }
 
         onLevelChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.level = " + level + ";" +
             "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
-            "if (typeof navigator.battery.onlevelchange != null) navigator.battery.onlevelchange()"
-            )
+            // TODO: fix on* handlers
+            //"try { navigator.battery.onlevelchange(); } catch () { alert('onlevelchange handler undefined'); };"
+            "")
         }
 
         onChargingChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.charging = " + charging + ";" +
             "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
-            "if (typeof navigator.battery.onchargingchange != null) navigator.battery.onchargingchange()")
+            //"try { navigator.battery.onchargingchange(); } catch () { alert('onchargingchange handler undefined'); };"
+            "")
         }
 
         onAlert: console.log("alert('" + message + "')")
