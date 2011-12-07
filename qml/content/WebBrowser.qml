@@ -47,8 +47,9 @@ import "js/webbrowser.js" as JS
 Rectangle {
     id: webBrowser
     property variant theme: chromiumTheme
-    property string urlString : "www.w3.org"
-    // property string urlString : "people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
+    // property string urlString: "www.w3.org"
+    property string urlString: "http://10.239.3.222/qml/webbrowser/tests/battery.html"
+    // property string urlString: "people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
 
     property alias webViewInstance: webView
 

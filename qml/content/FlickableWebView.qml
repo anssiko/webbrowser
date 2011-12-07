@@ -81,12 +81,20 @@ Flickable {
         property double level: 1.0
         property bool charging: true
 
-        javaScriptWindowObjects: QtObject {
-            WebView.windowObjectName: "debug"
-            function log(level, charging) {
-                return "{ level: " + level  + ", charging: " + charging + " }";
+        javaScriptWindowObjects: [
+            QtObject {
+                WebView.windowObjectName: "debug"
+                function battery(level, charging) {
+                    return "{ level: " + level  + ", charging: " + charging + " }";
+                }
+            },
+            QtObject {
+                WebView.windowObjectName: "console"
+                function log(msg) {
+                    console.log('console.log: ' + msg);
+                }
             }
-        }
+        ]
 
         onLoadFinished: {
             viewport.evaluateJavaScript(
@@ -94,23 +102,22 @@ Flickable {
             "    n.battery = { level: " + level + ", charging: " + charging + ", onlevelchange: null, onchargingchange: null }; " +
             "    n.mozBattery = n.battery;                                                                                      " +
             "})(window.navigator);                                                                                              " +
-            "document.title = debug.log(navigator.battery.level, navigator.battery.charging);")
+            "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);")
         }
 
         onLevelChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.level = " + level + ";" +
-            "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
-            // TODO: fix on* handlers
-            //"try { navigator.battery.onlevelchange(); } catch () { alert('onlevelchange handler undefined'); };" +
+            "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);" +
+            "if (typeof navigator.battery.onlevelchange === 'function') navigator.battery.onlevelchange();" +
             "")
         }
 
         onChargingChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.charging = " + charging + ";" +
-            "document.title = debug.log(navigator.battery.level, navigator.battery.charging);" +
-            //"try { navigator.battery.onchargingchange(); } catch () { alert('onchargingchange handler undefined'); };" +
+            "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);" +
+            "if (typeof navigator.battery.onchargingchange === 'function') navigator.battery.onchargingchange();" +
             "")
         }
 
