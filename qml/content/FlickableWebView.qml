@@ -98,10 +98,19 @@ Flickable {
 
         onLoadFinished: {
             viewport.evaluateJavaScript(
-            "(function(n) {                                                                                                     " +
-            "    n.battery = { level: " + level + ", charging: " + charging + ", onlevelchange: null, onchargingchange: null }; " +
-            "    n.mozBattery = n.battery;                                                                                      " +
-            "})(window.navigator);                                                                                              " +
+            "(function(n) {" +
+            "    n.battery = {" +
+            "        charging: " + charging + "," +
+            "        chargingTime: Infinity," +
+            "        dischargingTime: Infinity," +
+            "        level: " + level + "," +
+            "        onchargingchange: null," +
+            "        onchargingtimechange: null," +
+            "        ondischargingtimechange: null," +
+            "        onlevelchange: null" +
+            "    };" +
+            "    n.mozBattery = n.battery;" +
+            "})(window.navigator);" +
             "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);")
         }
 
