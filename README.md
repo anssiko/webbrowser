@@ -21,7 +21,7 @@ Installation
 * Make sure you have installed the MeeGo 1.2 Harmattan PR1.1 update to the device
 * Get Qt SDK 1.1.4 or later (http://qt.nokia.com/downloads/), put your device into SDK mode, build and deploy as usual
 
-* Alternatively, some (typically older) pre-built binaries are available at: build/{yyyy-mm-dd}-web-maemo6.deb
+* Alternatively, some (typically older) pre-built binaries are available at: build/{yyyy-mm-dd}-meebro-maemo6.deb
 
 Older versions
 =================
