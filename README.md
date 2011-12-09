@@ -1,27 +1,37 @@
 MeeBro - An Experimental Mee[Go] Bro[wser]
 ================
 
-MeeBro is a fork of the [Qt/QML web browser demo](http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser) used as a playground for experimenting with new Web APIs.
-
-In addition to the standard [QtWebKit features](http://trac.webkit.org/wiki/QtWebKit), this web browser implements the following extras:
+MeeBro is a fork of the [Qt/QML web browser demo](http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser) and is used as a playground for experimenting with new Web APIs. In addition to standard [QtWebKit features](http://trac.webkit.org/wiki/QtWebKit), MeeBro currently implements the following extras:
 
 * [Battery Status API](http://dev.w3.org/2009/dap/system-info/battery-status.html)
 
-Some other features added on top of the demo web browser:
+Some other features added on top of the demo web browser include:
 
 * Simpler user interface
 * Keyboard navigation and shortcuts (backspace, arrow keys ...)
 * Support for portrait and landscape modes
-* Search integration into location bar
+* Search integrated into the address bar
 
 Installation
 ================
 
-* The primary supported platform is MeeGo 1.2 Harmattan (Maemo 6), for others see Older versions
-* Make sure you have installed the MeeGo 1.2 Harmattan PR1.1 update to the device
-* Get Qt SDK 1.1.4 or later (http://qt.nokia.com/downloads/), put your device into SDK mode, build and deploy as usual
+Prerequisities
+----------------
 
-* Alternatively, some (typically older) pre-built binaries are available at: build/{yyyy-mm-dd}-meebro-maemo6.deb
+* The primary supported platform is MeeGo 1.2 Harmattan (Maemo 6), for others see Older versions
+
+Build from sources
+----------------
+
+* Make sure you have installed the MeeGo 1.2 Harmattan PR1.1 update to the device
+* Get [Qt SDK 1.1.4 or later](http://qt.nokia.com/downloads/), put your device into SDK mode, build and deploy as usual
+
+Install pre-built binaries
+----------------
+
+* Alternatively, some pre-built binaries are available at: build/{yyyy-mm-dd}-meebro-maemo6.deb
+* [Activate Developer Mode](http://harmattan-dev.nokia.com/docs/library/html/guide/html/Developer_Library_Developing_for_Harmattan_Activating_developer_mode.html), open Terminal, login as a root or use devel-su
+* dpkg -i yyyy-mm-dd-meebro-maemo6.deb
 
 Older versions
 =================
