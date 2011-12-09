@@ -49,7 +49,7 @@ Rectangle {
     property variant theme: chromiumTheme
     // property string urlString: "www.w3.org"
     property string urlString: "http://anssiko.github.com/webbrowser/test/battery.html"
-    // property string urlString: "people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
+    // property string urlString: "http://people.mozilla.org/~jhammink/webapi_test_pages/BatteryAPIdemo.html"
 
     property alias webViewInstance: webView
 

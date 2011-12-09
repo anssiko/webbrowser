@@ -83,12 +83,6 @@ Flickable {
 
         javaScriptWindowObjects: [
             QtObject {
-                WebView.windowObjectName: "debug"
-                function battery(level, charging) {
-                    return "{ level: " + level  + ", charging: " + charging + " }";
-                }
-            },
-            QtObject {
                 WebView.windowObjectName: "console"
                 function log(msg) {
                     console.log('console.log: ' + msg);
@@ -119,24 +113,19 @@ Flickable {
             "        }" +
             "    };" +
             "    n.mozBattery = n.battery;" +
-            "})(window.navigator);" +
-            "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);")
+            "})(window.navigator);")
         }
 
         onLevelChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.level = " + level + ";" +
-            "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);" +
-            "if (typeof navigator.battery.onlevelchange === 'function') navigator.battery.onlevelchange();" +
-            "")
+            "if (typeof navigator.battery.onlevelchange === 'function') navigator.battery.onlevelchange();")
         }
 
         onChargingChanged: {
             viewport.evaluateJavaScript(
             "navigator.battery.charging = " + charging + ";" +
-            "document.title = debug.battery(navigator.battery.level, navigator.battery.charging);" +
-            "if (typeof navigator.battery.onchargingchange === 'function') navigator.battery.onchargingchange();" +
-            "")
+            "if (typeof navigator.battery.onchargingchange === 'function') navigator.battery.onchargingchange();")
         }
 
         onAlert: console.log("alert('" + message + "')")
