@@ -1,7 +1,7 @@
-Web Browser
+MeeBro - An Experimental Mee[Go] Bro[wser]
 ================
 
-A fork of the [Qt/QML web browser demo](http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser) used as a playground for experimenting with new Web APIs.
+MeeBro is a fork of the [Qt/QML web browser demo](http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser) used as a playground for experimenting with new Web APIs.
 
 In addition to the standard [QtWebKit features](http://trac.webkit.org/wiki/QtWebKit), this web browser implements the following extras:
 
