@@ -1,7 +1,8 @@
+<img href="https://github.com/anssiko/webbrowser/raw/master/webbrowser.png" alt="MeeBro logo" style="float: left">
 MeeBro - An Experimental Mee[Go] Bro[wser]
 ================
 
-MeeBro is a fork of the [Qt/QML web browser demo](http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser) and is used as a playground for experimenting with new Web APIs. In addition to standard [QtWebKit features](http://trac.webkit.org/wiki/QtWebKit), MeeBro currently implements the following extras:
+MeeBro, or an Experimental Mee[Go] Bro[wser], is a fork of the [Qt/QML web browser demo](http://qt.gitorious.org/qt/qt/trees/4.7/demos/declarative/webbrowser) for experimenting with new Web APIs. In addition to standard [QtWebKit features](http://trac.webkit.org/wiki/QtWebKit) MeeBro currently implements the following extras:
 
 * [Battery Status API](http://dev.w3.org/2009/dap/system-info/battery-status.html)
 
