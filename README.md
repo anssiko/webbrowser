@@ -67,5 +67,5 @@ Symbian Belle
 Symbian^3
 ----------------
 
-* Install Qt 4.7.3 (qt.sis) and QtWebKit (qtwebkit.sis) e.g. from http://fixqt.com/
+* Install Qt 4.7.3 (qt.sis) and QtWebKit (qtwebkit.sis) e.g. from [www.fixqt.com](http://www.fixqt.com/)
 * Install build/{yyyy-mm-dd}-web-symbian3.sis
