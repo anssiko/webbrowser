@@ -42,6 +42,7 @@
 import QtQuick 1.1
 import QtWebKit 1.0
 import "js/webbrowser.js" as JS
+import QtMobility.feedback 1.1
 
 Flickable {
     property alias title: viewport.title
@@ -87,12 +88,22 @@ Flickable {
                 function log(msg) {
                     console.log('console.log: ' + msg);
                 }
+            },
+            QtObject {
+                WebView.windowObjectName: "__vibration__"
+                function vibrate(arg) {
+                    vibration.duration = arg
+                    vibration.running = true
+                }
             }
+
         ]
 
         onLoadFinished: {
             viewport.evaluateJavaScript(
             "(function(n) {" +
+
+            // Battery Status API
             "    n.battery = {" +
             "        charging: " + charging + "," +
             "        chargingTime: Infinity," +
@@ -113,7 +124,15 @@ Flickable {
             "        }" +
             "    };" +
             "    n.mozBattery = n.webKitBattery = n.battery;" +
-            "})(window.navigator);")
+
+            // Vibration API
+            "    n.vibrate = function (arg) {" +
+            "        __vibration__.vibrate(arg);" +
+            "    };" +
+            "    n.mozVibrate = n.webKitVibrate = n.vibrate;" +
+
+            "})(window.navigator);"
+            )
         }
 
         onLevelChanged: {
