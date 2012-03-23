@@ -112,7 +112,7 @@ Flickable {
             "            navigator.battery['on' + type] = null;" +
             "        }" +
             "    };" +
-            "    n.mozBattery = n.battery;" +
+            "    n.mozBattery = n.webKitBattery = n.battery;" +
             "})(window.navigator);")
         }
 
