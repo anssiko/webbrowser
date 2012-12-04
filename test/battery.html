@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Battery Status API Tests</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    function ok(msg) {
+        document.getElementById('ok').innerHTML += '<div>' + msg + '</div>';
+    }
+    
+    function fail(msg) {
+        document.getElementById('fail').innerHTML += '<div>' + msg + '</div>';
+    }
+    
+    var test = {};
+    
+    test.battery = {
+        charging: function () {
+            try {
+                // FIXME: Qt Simulator does not like typeof checking
+                //if (typeof navigator.battery.charging === 'boolean') {
+                    ok('navigator.battery.charging: ' + navigator.battery.charging);
+                //}
+            } catch (ex) {
+                fail('navigator.battery.charging: ' + ex);
+            }
+        },
+        chargingTime: function () {
+            try {
+                ok('navigator.battery.chargingTime: ' + navigator.battery.chargingTime);
+            } catch (ex) {
+                fail('navigator.battery.chargingTime: ' + ex);
+            }
+        },
+        dischargingTime: function () {
+            try {
+                ok('navigator.battery.dischargingTime: ' + navigator.battery.dischargingTime);
+            } catch (ex) {
+                fail('navigator.battery.dischargingTime: ' + ex);
+            }
+        },
+        level: function () {
+            try {
+                // FIXME: Qt Simulator does not like typeof checking
+                //if (typeof navigator.battery.level === 'number') {
+                    ok('navigator.battery.level: ' + navigator.battery.level);
+                //}
+            } catch (ex) {
+                fail('navigator.battery.level: ' + ex);
+            }
+        },
+        onchargingchange: function (msg) {
+            // FIXME: navigator.battery is uninitialized onload
+            if (typeof navigator.battery === 'object') {
+                try {
+                    navigator.battery.onchargingchange = function () {
+                        ok(msg || '' + 'onchargingchange, navigator.battery.charging: ' + navigator.battery.charging);
+                    }
+                } catch (ex) {
+                    fail('onchargingchange: ' + ex);
+                }
+            }
+        },
+        onchargingtimechange: function () {
+            // TODO
+        },
+        ondischargingtimechange: function () {
+            // TODO
+        },
+        onlevelchange: function (msg) {
+            // FIXME: navigator.battery is uninitialized onload
+            if (typeof navigator.battery === 'object') {
+                try {
+                    navigator.battery.onlevelchange = function () {
+                        ok(msg || '' + 'onlevelchange, navigator.battery.level: ' + navigator.battery.level);
+                    }
+                } catch (ex) {
+                    fail('onlevelchange: ' + ex);
+                }
+            }
+        },
+        addEventListenerLevelChange: function () {
+            try {
+                navigator.battery.addEventListener('levelchange', function () {
+                    ok('addEventListener(\'levelchange\'), navigator.battery.level: ' + navigator.battery.level);
+                });
+            } catch (ex) {
+                fail('addEventListener(\'levelchange\'): ' + ex);
+            }
+        },
+        removeEventListenerLevelChange: function () {
+            try {
+                navigator.battery.removeEventListener('levelchange', function () {
+                    ok('removeEventListener(\'levelchange\')');
+                });
+            } catch (ex) {
+                fail('removeEventListener(\'levelchange\'): ' + ex);
+            }
+        }
+        ,
+        addEventListenerChargingChange: function () {
+            try {
+                navigator.battery.addEventListener('chargingchange', function () {
+                    ok('addEventListener(\'chargingchange\'), navigator.battery.level: ' + navigator.battery.level);
+                });
+            } catch (ex) {
+                fail('addEventListener(\'chargingchange\'): ' + ex);
+            }
+        },
+        removeEventListenerChargingChange: function () {
+            try {
+                navigator.battery.removeEventListener('chargingchange', function () {
+                    ok('removeEventListener(\'chargingchange\')');
+                });
+            } catch (ex) {
+                fail('removeEventListener(\'chargingchange\'): ' + ex);
+            }
+        }
+    };
+    /*
+    window.onload = function () {
+        test.battery.onlevelchange('onload');
+        test.battery.onchargingchange('onload');
+    }
+    */
+    </script>
+  </head>
+  <body>
+    <h1>Battery Status API Tests</h1>
+    <!-- TODO: migrate tests to harness.js -->
+    <div class="controls">
+        <h3>Attributes</h3>
+        <div>
+            <button onclick="test.battery.level()">get level</button>
+            <button onclick="test.battery.charging()">get charging</button>
+            <button onclick="test.battery.chargingTime()">get chargingTime</button>
+            <button onclick="test.battery.dischargingTime()">get dischargingTime</button>
+        </div>
+        <h3>Event handlers</h3>
+        <div>
+            <button onclick="test.battery.onlevelchange()">add onlevelchange handler</button>
+            <button onclick="test.battery.onchargingchange()">add onchargingchange handler</button>
+        </div>
+        <div>
+            <button onclick="test.battery.addEventListenerLevelChange()">addEventListener('levelchange')</button>
+            <button onclick="test.battery.removeEventListenerLevelChange()">removeEventListener('levelchange')</button>
+        </div>
+        <div>
+            <button onclick="test.battery.addEventListenerChargingChange()">addEventListener('chargingchange')</button>
+            <button onclick="test.battery.removeEventListenerChargingChange()">removeEventListener('chargingchange')</button>
+        </div>
+    </div>
+    <h3>Passed:</h3>
+    <div id="ok"></div>
+    <h3>Failed:</h3>
+    <div id="fail"></div>
+  </body>
+</html>

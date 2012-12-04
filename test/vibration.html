@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vibration API Tests</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+    function ok(msg) {
+        document.getElementById('ok').innerHTML += '<div>' + msg + '</div>';
+    }
+    
+    function fail(msg) {
+        document.getElementById('fail').innerHTML += '<div>' + msg + '</div>';
+    }
+    
+    var test = {};
+    
+    test.vibration = {
+        vibrateIsPresent: function () {
+            try {
+                if (typeof navigator.vibrate === 'function') {
+                  ok('navigator.vibrate() is present');
+                }
+            } catch (ex) {
+                fail('navigator.vibrate() is not present: ' + ex);
+            }
+        },
+        vibrate: function (arg) {
+            try {
+                navigator.vibrate(arg);
+                ok('navigator.vibrate(' + arg + ')  passed');
+            } catch (ex) {
+                fail('navigator.vibrate(' + arg + ') failed: ' + ex);
+            }
+        }
+    };
+    </script>
+  </head>
+  <body>
+    <h1>Vibration API Tests</h1>
+    <p>
+      See also: <a href="http://w3c-test.org/dap/tests/vibration/">Vibration API testharness.js tests</a>
+    <p>
+    <div class="controls">
+        <h3>Methods</h3>
+        <div>
+            <button onclick="test.vibration.vibrateIsPresent()">vibrate() is present</button>
+            <button onclick="test.vibration.vibrate(100)">vibrate(100)</button>
+            <button onclick="test.vibration.vibrate(1000)">vibrate(1000)</button>
+        </div>
+    </div>
+    <h3>Passed:</h3>
+    <div id="ok"></div>
+    <h3>Failed:</h3>
+    <div id="fail"></div>
+  </body>
+</html>

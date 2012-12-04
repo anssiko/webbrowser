@@ -1,0 +1,8 @@
+body { margin-top: 0; padding-top: 0; font: 100% sans-serif; top: 0px; }
+h1, h2, h3 { color: #005a9c; }
+h1 { font: 170% sans-serif; }
+h3 { font: 110% sans-serif; }
+#ok, #fail { font: 100% sans-serif; }
+#ok > div, #fail > div { border: 0; padding: 0px; }
+.controls { border: dotted 1px gray; padding: 5px; margin-bottom: 10px; background-color: #f0f0f0; }
+button { margin: 5px; }
